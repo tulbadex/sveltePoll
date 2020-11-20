@@ -1,0 +1,3 @@
+# working with sublime text 3
+theme: dgo to daylerees on github or his theme and choose any one them but 
+laracast founder use is slime. install by clicking on sublime from github
