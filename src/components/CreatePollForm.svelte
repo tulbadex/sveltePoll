@@ -1,5 +1,9 @@
 <script> 
-    import Button from '../shared/Button.svelte'
+    import PollStore from '../stores/PollStore.js';
+    import { createEventDispatcher } from 'svelte';
+    import Button from '../shared/Button.svelte';
+
+    let dispatch = createEventDispatcher();
     let fields = {question: '', answerA: '', answerB: ''};
     let errors = {question: '', answerA: '', answerB: ''};
     let valid = false;
@@ -32,6 +36,17 @@
         }else{
             errors.answerB = '';
             valid = true;
+        }
+
+        if (valid) {
+            // ... spread all the fields in fields object
+            let poll = {...fields, votesA: 0, votesB: 0, id: Math.random()};
+            // save poll to store 
+            PollStore.update( currentPolls => {
+                return [poll, ...currentPolls]
+            })
+            dispatch('add');
+            // console.log('valid', fields);
         }
     }
 </script>
